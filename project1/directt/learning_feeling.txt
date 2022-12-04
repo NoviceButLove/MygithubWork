@@ -1,0 +1,3 @@
+In Python you can use list to store the date you like 
+In Python you can use turple to store a part of data
+In Python you can use the set to store the date ,not make them appear again
