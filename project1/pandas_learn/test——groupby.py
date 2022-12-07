@@ -22,11 +22,21 @@ print(df2)
 print('-----------------------------')
 file1 = r'C:\Users\86151\Desktop\File_Test\enligh_test.xlsx'
 gp = pd.read_excel(file1)
+gp = gp.dropna(axis=0, how='any')
+print(type(gp['我的练习时长']))
+'''
 gp0 = gp.dropna(axis=0, how='any')
 gp1 = gp0.groupby('授课教师')
 #print(type(gp['我的练习时长']))
 gp1 = gp1['我的练习完成度'].mean()
 #gp1 = gp1.sort_values(ascending=False)
 #print(gp1)
+'''
+print('------------------------------')
+dict = {'男': 'male', '女': 'female'}
+gp['new_gender'] = gp['性别'].map(dict)
+print(gp.head(3))
+print(gp['new_gender'].count())
+
 
 
