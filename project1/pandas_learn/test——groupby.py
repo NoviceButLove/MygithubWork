@@ -36,7 +36,8 @@ print('------------------------------')
 dict = {'男': 'male', '女': 'female'}
 gp['new_gender'] = gp['性别'].map(dict)
 print(gp.head(3))
-print(gp['new_gender'].count())
+print(gp['new_gender'].value_counts())
+print('---------------------------')
 
 
 
