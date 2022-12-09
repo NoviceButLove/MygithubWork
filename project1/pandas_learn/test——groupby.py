@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-df = pd.DataFrame([[4,9]] * 3, columns=['A', 'B'])
+df = pd.DataFrame([[4, 9]] * 3, columns=['A', 'B'])
 
 print(df)
 print('-------------------------')
@@ -14,11 +14,15 @@ print(df1)
 print(type(df1))
 
 print('---------------------')
+
+
 def cubic(x):
     return x**3
+
+
 df2 = df.apply(cubic)
 print(df2)
-
+print(df2['A'].dtype)  # 返回Series的类型
 print('-----------------------------')
 file1 = r'C:\Users\86151\Desktop\File_Test\enligh_test.xlsx'
 gp = pd.read_excel(file1)
@@ -33,11 +37,8 @@ gp1 = gp1['我的练习完成度'].mean()
 #print(gp1)
 '''
 print('------------------------------')
-dict = {'男': 'male', '女': 'female'}
-gp['new_gender'] = gp['性别'].map(dict)
+dict1 = {'男': 'male', '女': 'female'}
+gp['new_gender'] = gp['性别'].map(dict1)  # 值的替换
 print(gp.head(3))
-print(gp['new_gender'].value_counts())
+print(gp['new_gender'].value_counts())  # 枚举，值的计数
 print('---------------------------')
-
-
-
