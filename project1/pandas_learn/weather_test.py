@@ -10,9 +10,8 @@ import pandas as pd
 
 
 name = r'C:\Users\86151\Desktop\File_Test\weather\testset.csv'
-f1 = pd.read_csv(name)  # 读取
-f1.dropna(axis=0, how='any')  # 预处理，出去有
-# 空值得行
+f1 = pd.read_csv(name)  # 读取1000行
+f1.dropna(axis=0, how='any')  # 预处理，除去有空的行
 print('--------------_wgustm 的空值----------------------')
 print(f1.loc[f1[' _wgustm'].notnull() |
              f1[' _windchillm'].notnull()])  # 条件查找
@@ -57,3 +56,16 @@ print(type(f1['datetime_utc']))
 print('0000000000000-----loc()条件查找法----------0000000000')
 f5 = f1.loc[f1[' _heatindexm'].notnull()]
 print(f5.head(3))
+print('-----------2022/12/15')
+print(f1.head(5))
+f2 = pd.read_csv(name, chunksize=1000)  # nrows= 用于指定读取多少行
+#  chunksize 逐行读取，读取全部
+conds = pd.Series([], dtype='float64')
+for cond in f2:
+    conds = conds.add(cond[' _conds'].value_counts(), fill_value=0)
+conds = conds.sort_values(ascending=False)
+print('-----------------------')
+print(conds)
+
+
+

@@ -9,13 +9,13 @@ from start_game import create_fleet
 from start_game import regame
 
 
-def check_events(ai_settings,screen,stats,button,ship,aliens,bullets,sb):
+def check_events(ai_settings, screen, stats, button,ship,aliens,bullets,sb):
     # 监视键盘和鼠标事件
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
         elif event.type == pygame.KEYDOWN:
-            check_keydown_events(event,ai_settings,screen,stats,button,ship,aliens,bullets,sb)
+            check_keydown_events(event, ai_settings, screen, stats, button, ship, aliens, bullets, sb)
         elif event.type == pygame.KEYUP:
             check_keyup_events(event,ship)
         elif event.type == pygame.MOUSEBUTTONDOWN:
