@@ -1,21 +1,31 @@
+"""这是一个书上文本的fork&copy"""
+
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import re
-import random
-import datetime
 
-random.seed(datetime.datetime.now())  # 生成随机数
+pages = set()
 
 
-def getLinks(articleUrl):
-    """定义函数，用于查找相关链接"""
-    html = urlopen("http://en.wikipedia.org" + articleUrl)  # 经典，urlopen 打开网址
-    bsobj = BeautifulSoup(html, features="lxml")  # 经典， soup读取网页
-    """返回值，找div 属性 bodyContent 下，所有，<a>标签下，href 属性 为（正则表达式）的"""
-    return bsobj.find("div", {'id': "bodyContent"}).findAll("a", href=re.compile("^(/wiki/)((?!:).)*$"))  # 返回一个列表
+def getLinks(pageUrl):
+    global pages
+    html = urlopen("http://en.wikipedia.org" + pageUrl)
+    bsObj = BeautifulSoup(html)
+    try:
+        print(bsObj.h1.get_text())
+        print(bsObj.find(id="mw-content-text").findAll("p")[0])
+        print(bsObj.find(id="ca-edit").find("span").find("a").attrs['href'])
+    except AttributeError:
+        print("页面缺少一些属性！不过不用担心！")
+
+    for link in bsObj.findAll("a", href=re.compile("^(/wiki/)")):
+        if 'href' in link.attrs:
+            if link.attrs['href'] not in pages:
+                # 我们遇到了新页面
+                newPage = link.attrs['href']
+                print("----------------\n" + newPage)
+                pages.add(newPage)
+                getLinks(newPage)
 
 
-links = getLinks("/wiki/Kevin_Bacon")  # 调用函数，赋初值
-while len(links) > 0:  # 当结果不为零
-    newArticle = links[random.randint(0, len(links)-1)].attrs["href"]  # 取列表中的某一条
-    links = getLinks(newArticle)  # 继续搜索
+getLinks("")
