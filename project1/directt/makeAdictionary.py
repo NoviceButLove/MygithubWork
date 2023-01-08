@@ -33,6 +33,9 @@ print(ite)
 print(list(ky))
 print(list(val))
 print(list(ite))
+print("------------------------------------")
+dict3 = {1: 'hello', 2: 'world'}
+
 
 
 
